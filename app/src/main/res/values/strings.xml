@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Video Converter</string>
+    <string name="permission_storage_message">Please Grant Storage Permission</string>
+</resources>
