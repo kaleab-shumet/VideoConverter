@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/User/Desktop/dev/AndroidStudio/VideoConverter/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/User/Desktop/dev/AndroidStudio/VideoConverter/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/User/Desktop/dev/AndroidStudio/VideoConverter/app/src/main/res/layout/file_list_item.xml" value="0.18" />
         <entry key="..\:/Users/User/Desktop/dev/AndroidStudio/VideoConverter/app/src/main/res/layout/metadata_dialog.xml" value="0.22" />
+        <entry key="..\:/Users/User/Desktop/dev/AndroidStudio/VideoConverter/app/src/main/res/xml/provider_paths.xml" value="0.1" />
       </map>
     </option>
   </component>

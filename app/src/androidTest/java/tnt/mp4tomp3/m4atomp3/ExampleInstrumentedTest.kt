@@ -1,4 +1,4 @@
-package com.tnt.videoconverter
+package tnt.mp4tomp3.m4atomp3
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.tnt.videoconverter", appContext.packageName)
+        assertEquals("tnt.mp4tomp3.m4atomp3", appContext.packageName)
     }
 }
