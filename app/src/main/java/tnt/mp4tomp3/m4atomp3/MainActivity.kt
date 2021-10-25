@@ -23,12 +23,14 @@ import me.rosuh.filepicker.bean.FileItemBeanImpl
 import me.rosuh.filepicker.config.AbstractFileFilter
 import me.rosuh.filepicker.config.FilePickerManager
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private lateinit var addFilesButton: Button
-    private lateinit var folderToSave: File
     private lateinit var builder: AlertDialog.Builder
     private lateinit var convertButton: Button
     private lateinit var outPutDirTv: TextView
@@ -61,7 +63,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         builder = AlertDialog.Builder(this)
 
-        folderToSave = commonDocumentDirPath("Mp4-To-Mp3")
 
 
         initBitrateSpinner()
@@ -97,7 +98,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         FilePickerManager
             .from(this)
-            .setTheme(R.style.FilePickerThemeRail)
             .maxSelectable(15)
             .filter(object : AbstractFileFilter() {
                 override fun doFilter(listData: ArrayList<FileItemBeanImpl>): ArrayList<FileItemBeanImpl> {
@@ -231,8 +231,9 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 totalDuration = sDuration
         }
 
-        Log.d(TAG, "convertVideo: sDuration-$totalDuration")
 
+        val timeStamp = SimpleDateFormat("yyyy-MM-dd HH.mm.ss").format(Date())
+        val folderToSave = commonDocumentDirPath("Mp3-$timeStamp")
 
         val outDirStr = "Location: " + folderToSave.absolutePath
         outPutDirTv.text = outDirStr
@@ -244,13 +245,16 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             multipleInputCommand += " -i \"$selectedFilePath\""
 
 
-        for (i in 0 until this.selectedFilesList.size) {
-            val mAudFilePath =
+        /*val mAudFilePath =
                 "${folderToSave.absolutePath}/${removeExt(this.selectedFilesList[i])}-${
                     Utils().randomString(
                         3
                     )
-                }.mp3"
+                }.mp3"*/
+
+        for (i in 0 until this.selectedFilesList.size) {
+            val mAudFilePath =
+                "${folderToSave.absolutePath}/${removeExt(this.selectedFilesList[i])}.mp3"
             multipleInputCommand += " -map $i  -vn -b:a $selectedBitrate \"$mAudFilePath\""
         }
 
@@ -276,7 +280,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                     )
 
                     runOnUiThread {
-                        displayCompletedDialog()
+                        displayCompletedDialog(folderToSave.absolutePath)
                     }
 
                 }, { log ->
@@ -303,10 +307,10 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    private fun displayCompletedDialog() {
+    private fun displayCompletedDialog(workingDir: String) {
         builder
             .setTitle("Conversion Complete")
-            .setMessage("You can get your files in \n" + folderToSave.absolutePath)
+            .setMessage("You can get your files in \n$workingDir")
             .setCancelable(false)
             .setPositiveButton("OK") { _: DialogInterface, _: Int ->
                 convertButton.isEnabled = true

@@ -14,8 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
-        android:theme="@style/Theme.MP4TOMP3.M4ATOMP3"
-        android:fullBackupContent="">
+        android:theme="@style/Theme.MP4TOMP3.M4ATOMP3">
         <activity
             android:name="tnt.mp4tomp3.m4atomp3.MainActivity"
             android:exported="true">
